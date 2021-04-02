@@ -20,9 +20,6 @@ export default function CloudStorage(props) {
 
     const pickFromGallery = () => {
         ImagePicker.openPicker({
-            width: 425,
-            height: 575,
-            cropping: true
         }).then(image => {
             console.log(image);
             const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
@@ -36,9 +33,6 @@ export default function CloudStorage(props) {
             let response = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
             if (response === 'granted') {
                 ImagePicker.openCamera({
-                    width: 425,
-                    height: 600,
-                    cropping: true,
                 }).then(image => {
                     console.log(image);
                     const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;

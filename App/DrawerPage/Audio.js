@@ -60,7 +60,22 @@ export default function AudioPlayer(props) {
     const StartRec = async () => {
 
         if (recording) {
-            console.warn('Already recording!');
+            console.log('Already recording!');
+            if (recPaused) {
+                try {
+                    await AudioRecorder.resumeRecording();
+                    setRecPaused(false);
+                } catch (error) {
+                    console.error(error);
+                }
+            } else {
+                try {
+                    const filePath = await AudioRecorder.pauseRecording();
+                    setRecPaused(true);
+                } catch (error) {
+                    console.error(error);
+                }
+            }
             return;
         }
 
@@ -68,7 +83,6 @@ export default function AudioPlayer(props) {
             RecPath();
         }
 
-        //  this.setState({ recording: true, paused: false });
         setRecording(true);
         setRecPaused(false);
 
@@ -79,36 +93,6 @@ export default function AudioPlayer(props) {
         }
     }
 
-    const pauseRec = async () => {
-        if (!recording) {
-            console.warn('Can\'t pause, not recording!');
-            return;
-        }
-
-        try {
-            const filePath = await AudioRecorder.pauseRecording();
-            // this.setState({ paused: true });
-            setRecPaused(true);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-
-    const resumeRec = async () => {
-        if (!recPaused) {
-            console.warn('Can\'t resume, not paused!');
-            return;
-        }
-
-        try {
-            await AudioRecorder.resumeRecording();
-            // this.setState({ paused: false });
-            setRecPaused(false);
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     const stopRec = async () => {
         if (!recording) {
@@ -116,7 +100,6 @@ export default function AudioPlayer(props) {
             return;
         }
 
-        // this.setState({ stoppedRecording: true, recording: false, paused: false });
         setStopRecording(true);
         setRecording(false);
         setRecPaused(true);
@@ -218,18 +201,11 @@ export default function AudioPlayer(props) {
                 <Text style={{ color: 'dodgerblue', fontSize: 40, padding: 20 }}>{formatTime(currentRecTime)}</Text>
 
                 <View style={{ flexDirection: 'row' }}>
-                    {/* Start Recording */}
-                    <TouchableOpacity
-                        onPress={StartRec}
-                        style={{ paddingHorizontal: 15 }}
-                    >
-                        <Image source={rePlayIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
-                    </TouchableOpacity>
                     <View style={{ height: 5 }} />
 
-                    {/* Pause/Resume Recording */}
+                    {/* Start & Pause/Resume Recording */}
                     <TouchableOpacity
-                        onPress={recPaused ? resumeRec : pauseRec}
+                        onPress={StartRec}
                         style={{ paddingHorizontal: 15 }}
                     >
                         <Image source={recPaused ? playIcon : pauseIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
@@ -257,18 +233,18 @@ export default function AudioPlayer(props) {
 
 
                     <TouchableOpacity
-                        onPress={paused ? playAudio : pauseAudio}
+                        onPress={playAudio}
                         style={{ paddingHorizontal: 15 }}
                     >
                         <Image source={paused ? playIcon : pauseIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         onPress={stopAudio}
                         style={{ paddingHorizontal: 15 }}
                     >
                         <Image source={stopIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                 </View>
 
