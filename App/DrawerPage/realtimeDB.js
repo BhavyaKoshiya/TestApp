@@ -94,7 +94,7 @@ export default function RealTimeDB(props) {
                         props.navigation.navigate('Update', { item })
                     }}
                 >
-                    <Image source={editIcon} style={{ height: 20, width: 20, tintColor: '#ea8478' }} />
+                    <Image source={editIcon} style={{ height: 20, width: 20, tintColor: '#9a09ff' }} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -122,18 +122,18 @@ export default function RealTimeDB(props) {
 
                     <InputWithIcon
                         placeholder='Name'
-                        selectionColor={'#ea8478'}
+                        selectionColor={'#9a09ff'}
                         value={Name}
                         onChangeText={text => setName(text)}
-                        contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#ea8478', height: 40, width: 170 }}
+                        contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#9a09ff', height: 40, width: 170 }}
                     />
                     <View style={{ width: 15 }} />
                     <InputWithIcon
                         placeholder='Surname'
                         value={Surname}
-                        selectionColor={'#ea8478'}
+                        selectionColor={'#9a09ff'}
                         onChangeText={text => setSurname(text)}
-                        contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#ea8478', height: 40, width: 170 }}
+                        contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#9a09ff', height: 40, width: 170 }}
                     />
 
                 </View>
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
         height: 15
     },
     button: {
-        backgroundColor: '#ea8478',
+        backgroundColor: '#9a09ff',
         borderRadius: 30,
         paddingVertical: 7,
         paddingHorizontal: 30

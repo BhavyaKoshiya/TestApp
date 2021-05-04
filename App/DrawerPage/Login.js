@@ -39,7 +39,7 @@ export default function Login({ navigation }) {
             source={emailIcon}
             caretHidden
             keyboardType='email-address'
-            // selectionColor={'#ea8478'}
+            // selectionColor={'#9a09ff'}
             iconStyle={{ tintColor: '#595959', width: 15, height: 15 }}
             onChangeText={text => setEmail(text)}
             contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 0 }}
@@ -48,7 +48,7 @@ export default function Login({ navigation }) {
           <InputWithIcon
             placeholder='Password'
             source={lockIcon}
-            selectionColor={'#ea8478'}
+            selectionColor={'#9a09ff'}
             secureTextEntry={true}
             onChangeText={text => setPassword(text)}
             iconStyle={{ tintColor: '#595959' }}
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     height: 15
   },
   button: {
-    backgroundColor: '#ea8478',
+    backgroundColor: '#9a09ff',
     borderRadius: 30,
     paddingVertical: 15,
     paddingHorizontal: 30

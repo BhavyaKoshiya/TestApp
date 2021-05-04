@@ -77,7 +77,7 @@ export default function FBads(props) {
 const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
-        backgroundColor: '#ea8478',
+        backgroundColor: '#9a09ff',
         borderRadius: 30,
         alignSelf: 'center',
         paddingVertical: 15,

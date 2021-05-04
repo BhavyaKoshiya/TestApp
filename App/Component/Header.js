@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         // borderTopWidth: 1,
-        backgroundColor: '#111111',
+        backgroundColor: '#9a09ff',
         // backgroundColor: 'rgba(0, 85, 255, 0.15)',
     },
     headerTitle: {
         fontSize: 24,
-        color: '#595959',
+        color: '#fff',
         fontWeight: 'bold',
     },
     backIcon: {

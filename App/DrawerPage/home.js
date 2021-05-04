@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    backgroundColor: '#ea8478',
+    backgroundColor: '#9a09ff',
     borderRadius: 30,
     alignSelf: 'center',
     paddingVertical: 15,

@@ -84,10 +84,10 @@ export default function Firestore(props) {
 
                 <InputWithIcon
                     placeholder='New TODO'
-                    selectionColor={'#ea8478'}
+                    selectionColor={'#9a09ff'}
                     value={todo}
                     onChangeText={text => setTodo(text)}
-                    contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#ea8478', height: 40 }}
+                    contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#9a09ff', height: 40 }}
                 />
                 <View style={styles.spaceDivider} />
 
@@ -131,14 +131,14 @@ const styles = StyleSheet.create({
         height: 15
     },
     button: {
-        backgroundColor: '#ea8478',
+        backgroundColor: '#9a09ff',
         borderRadius: 30,
         paddingVertical: 7,
         paddingHorizontal: 30
     },
     checkboxContainer: {
         borderWidth: 1,
-        borderColor: "#ea8478",
+        borderColor: "#9a09ff",
         width: 20,
         height: 20,
         borderRadius: 3,

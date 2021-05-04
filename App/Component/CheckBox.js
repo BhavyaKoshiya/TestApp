@@ -19,7 +19,7 @@ export function Check({
             <View style={{ flexDirection: 'row', alignItems: "center" }}>
                 <View
 
-                    style={[styles.checkboxContainer, contentContainerStyle, { backgroundColor: isChecked ? "#ea8478" : "transparent" }]}
+                    style={[styles.checkboxContainer, contentContainerStyle, { backgroundColor: isChecked ? "#9a09ff" : "transparent" }]}
                 >
 
                     {(isChecked) && <Image source={source || checkIcon} style={[styles.checkStyle, checkboxStyle]} />}
@@ -34,7 +34,7 @@ export function Check({
 const styles = StyleSheet.create({
     checkboxContainer: {
         borderWidth: 1,
-        borderColor: "#ea8478",
+        borderColor: "#9a09ff",
         width: 20,
         height: 20,
         borderRadius: 3,

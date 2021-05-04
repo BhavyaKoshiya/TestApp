@@ -125,7 +125,7 @@ export default function Ads({ navigation }) {
 }
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: '#ea8478',
+        backgroundColor: '#9a09ff',
         borderRadius: 30,
         alignSelf: 'center',
         paddingVertical: 15,

@@ -62,7 +62,7 @@ export default function Update({ route, navigation }) {
 
     return (
         <SafeAreaView style={styles.container} >
-            <View style={{ borderColor: '#ea8478', borderWidth: 1, borderRadius: 15 }}>
+            <View style={{ borderColor: '#9a09ff', borderWidth: 1, borderRadius: 15 }}>
                 <View style={{ height: 10 }} />
 
                 <Text style={styles.titleText}>Update Data</Text>
@@ -80,12 +80,12 @@ export default function Update({ route, navigation }) {
 
                         <InputWithIcon
                             placeholder='Name'
-                            selectionColor={'#ea8478'}
+                            selectionColor={'#9a09ff'}
                             value={Name}
                             title={'Name'}
                             titleStyle={{ color: '#595959' }}
                             onChangeText={text => setName(text)}
-                            contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#ea8478', height: 40, width: 170 }}
+                            contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#9a09ff', height: 40, width: 170 }}
                         />
                         <View style={{ width: 15 }} />
                         <InputWithIcon
@@ -93,9 +93,9 @@ export default function Update({ route, navigation }) {
                             value={Surname}
                             title={'Surname'}
                             titleStyle={{ color: '#595959' }}
-                            selectionColor={'#ea8478'}
+                            selectionColor={'#9a09ff'}
                             onChangeText={text => setSurname(text)}
-                            contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#ea8478', height: 40, width: 170 }}
+                            contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#9a09ff', height: 40, width: 170 }}
                         />
 
                     </View>
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         height: 15
     },
     button: {
-        backgroundColor: '#ea8478',
+        backgroundColor: '#9a09ff',
         borderRadius: 30,
         paddingVertical: 7,
         paddingHorizontal: 30
