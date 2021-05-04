@@ -11,9 +11,7 @@ export function Header({ title, headerContainerStyle, headerTitleStyle }) {
 
         <View style={[styles.headerContainer, headerContainerStyle]}>
 
-            <TouchableOpacity
-                onPress={() => { navigation.toggleDrawer(); }}
-            >
+            <TouchableOpacity onPress={() => { navigation.toggleDrawer() }}>
                 <Image
                     style={styles.backIcon}
                     source={menuIcon}
@@ -23,6 +21,7 @@ export function Header({ title, headerContainerStyle, headerTitleStyle }) {
 
                 <Text style={[styles.headerTitle, headerTitleStyle]}>{title}</Text>
             </View>
+            
         </View>
     )
 
