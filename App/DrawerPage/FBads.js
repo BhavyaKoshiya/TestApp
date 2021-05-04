@@ -1,21 +1,69 @@
-import React, { useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { BannerView, InterstitialAdManager } from 'react-native-fbads';
+import React, { useEffect, useRef } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ToastAndroid } from "react-native";
+import {
+    InterstitialAdManager,
+    BannerView,
+    AdIconView,
+    MediaView,
+    AdChoicesView,
+    TriggerableView,
+    NativeAdsManager,
+    withNativeAd,
+} from 'react-native-fbads';
+import { Header } from "../Component/Header";
 
+const adsManager = new NativeAdsManager('429478654990775_477054126899894', 10);
 
 export default function FBads(props) {
 
+    // const nativeAdViewRef = useRef();
+
+    // const __onNativeAd = () => {
+    //     console.log(nativeAdViewRef);
+    //     try {
+    //         nativeAdViewRef.current?.loadAd();
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     const InterstitialAd = () => {
         InterstitialAdManager.showAd('429478654990775_455647165707257')
-            .then((didClick) => console.log('didClick', didClick))
-            .catch((error) => console.log('error', error));
+            .then((didClick) => console.log(' InterstitialAd Click', didClick))
+            .catch((error) => console.log('InterstitialAd error', error));
     }
     return (
         <View style={{ flex: 1 }}>
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+             <Header
+                title='Facebook ADS'
+            />
+            {/* <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={styles.titleText}>Facebook ADs</Text>
+            </View> */}
+            {/* <View style={{ height: 20 }} /> */}
+            <View>
+                <AdComponent adsManager={adsManager} />
             </View>
+            <View style={{ height: 20 }} />
+
+
+            <Text>Banner- Standard</Text>
+            <BannerView
+                placementId="429478654990775_455691985702775"
+                type="standard"
+                onPress={() => ToastAndroid.show("Banner click", ToastAndroid.SHORT)}
+                onLoad={() => ToastAndroid.show("Banner loaded", ToastAndroid.SHORT)}
+                onError={(err) => console.log('Banner Standard error', err)}
+            />
+            <View style={{ height: 20 }} />
+            <Text>Banner- Large</Text>
+            <BannerView
+                placementId="429478654990775_455691985702775"
+                type="large"
+                onPress={() => ToastAndroid.show("Banner click", ToastAndroid.SHORT)}
+                onLoad={() => ToastAndroid.show("Banner loaded", ToastAndroid.SHORT)}
+                onError={(err) => console.log('Banner Large error', err)}
+            />
             <View style={{ height: 20 }} />
             <TouchableOpacity
                 style={styles.button}
@@ -23,24 +71,6 @@ export default function FBads(props) {
             >
                 <Text style={{ fontSize: 20, color: 'white', paddingHorizontal: 25 }}>InterstitialAd</Text>
             </TouchableOpacity>
-            <View style={{ height: 20 }} />
-            <Text>Banner- Standard</Text>
-            <BannerView
-                placementId="429478654990775_455691985702775"
-                type="standard"
-                onPress={() => console.log('click')}
-                onLoad={() => console.log('loaded')}
-                onError={(err) => console.log('error', err)}
-            />
-            <View style={{ height: 20 }} />
-            <Text>Banner- Large</Text>
-            <BannerView
-                placementId="429478654990775_455691985702775"
-                type="large"
-                onPress={() => console.log('click')}
-                onLoad={() => console.log('loaded')}
-                onError={(err) => console.log('error', err)}
-            />
         </View>
     )
 }
@@ -61,3 +91,25 @@ const styles = StyleSheet.create({
         marginTop: 50
     },
 });
+
+class MyAd extends React.Component {
+    render() {
+        // console.log(this.props.nativeAd.bodyText);
+        return (
+            <View>
+                <AdChoicesView />
+                <AdIconView style={{ width: 50, height: 50 }} />
+                <TriggerableView>
+                    <Text style={{ fontWeight: 'bold' }}>
+                        {this.props.nativeAd.headline}
+                    </Text>
+                    <Text> {this.props.nativeAd.bodyText}</Text>
+                </TriggerableView>
+                <MediaView style={{ width: 160, height: 90 }} />
+                
+            </View>
+        );
+    }
+}
+
+export const AdComponent = withNativeAd(MyAd);

@@ -38,11 +38,14 @@ import uploadIcon from './upload.png'
 import adsIcon from './ads.png'
 import newGoogleIcon from './newGoogle.png'
 import facebookIcon from './facebook.png'
-
+import muteIcon from './mute-speaker.png';
+import menuIcon from './menu.png';
 
 
 
 export {
+    menuIcon,
+    muteIcon,
     checkIcon,
     userIcon,
     newUserIcon,

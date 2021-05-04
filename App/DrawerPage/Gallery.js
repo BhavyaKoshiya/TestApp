@@ -4,6 +4,7 @@ import { FlatList, ScrollView, } from 'react-native-gesture-handler';
 import { closeIcon, rightIcon, leftIcon } from "../assets/icon/index";
 import ImageView from "react-native-image-viewing";
 import Modal from 'react-native-modal';
+import { Header } from '../Component/Header';
 
 
 export default function Gallery(props) {
@@ -85,23 +86,23 @@ export default function Gallery(props) {
 
     const footerComponent = () => {
 
-        return <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', paddingBottom:20}}>
+        return <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingBottom: 20 }}>
 
             <TouchableOpacity
                 onPress={prevImage}
-                style={{paddingHorizontal:15}}
+                style={{ paddingHorizontal: 15 }}
             >
                 <Image source={leftIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
             </TouchableOpacity>
 
             <TouchableOpacity
                 onPress={nextImage}
-                style={{paddingHorizontal:15}}
+                style={{ paddingHorizontal: 15 }}
             >
                 <Image source={rightIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
             </TouchableOpacity>
         </View>
-        
+
 
     }
 
@@ -110,7 +111,9 @@ export default function Gallery(props) {
         <SafeAreaView
             style={{ flex: 1 }}
         >
-
+            <Header
+                title='Gallery'
+            />
             <View style={{ height: 10 }} />
             <Text style={{ alignSelf: 'center', paddingVertical: 10 }}>Gallery</Text>
             <View style={{ padding: 10 }}>

@@ -5,33 +5,27 @@ import { pauseIcon, playIcon, stopIcon, speakerIcon, rePlayIcon } from "../asset
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
 import Sound from 'react-native-sound';
 import Slider from '@react-native-community/slider';
+import { Header } from "../Component/Header";
 
 
 export default function AudioPlayer(props) {
     const audioPath = AudioUtils.DownloadsDirectoryPath + '/test.aac';
-    //    const demoTime = 18550;
-    const [recording, setRecording] = useState(false);
-    const [paused, setPaused] = useState(true);
-    const [recPaused, setRecPaused] = useState(true);
-    const [stopRecording, setStopRecording] = useState(false);
-    const [finished, setFinished] = useState(false);
-    const [audio, setAudio] = useState(1);
+    const [time, setTime] = useState(0);
+    const [status, setStatus] = useState('start');
     const [duration, setDuration] = useState(0);
-    const [currentRecTime, setCurrentRecTime] = useState(0);
-    const [currentPlayTime, setCurrentPlayTime] = useState(0);
-    var sound = null;
+    const [currenttime, setCurrentTime] = useState(0);
+    const [sound, setSound] = useState(null);
+    const [isplaying, setIsPlaying] = useState(false);
     var Interval;
-
-
     useEffect(() => {
-        RecPath();
+        //_load()
+    }, []);
+    useEffect(() => {
         AudioRecorder.onProgress = (data) => {
-            setCurrentRecTime(Math.floor(data.currentTime));
+            setTime(Math.floor(data.currentTime));
         };
     }, []);
-
-    // console.log(audioPath);
-    function RecPath() {
+    function _audioPath() {
         AudioRecorder.prepareRecordingAtPath(audioPath, {
             SampleRate: 22050,
             Channels: 1,
@@ -39,6 +33,105 @@ export default function AudioPlayer(props) {
             AudioEncoding: 'aac',
             AudioEncodingBitRate: 32000,
         });
+    }
+
+    async function RecordAudio() {
+        if (isplaying) {
+            ToastAndroid.show("Plese Pause Audio Player", ToastAndroid.SHORT)
+        } else {
+            if (status == 'start') {
+                try {
+                    _audioPath();
+                    const filePath = await AudioRecorder.startRecording();
+                    setStatus('pause');
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            if (status == 'play') {
+                try {
+                    await AudioRecorder.resumeRecording();
+                    setStatus('pause');
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            if (status == 'pause') {
+                try {
+                    const filePath = await AudioRecorder.pauseRecording();
+                    setStatus('play');
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        }
+    }
+
+    async function StopRecording() {
+        try {
+            const filePath = await AudioRecorder.stopRecording();
+            AudioRecorder.onFinished = (data) => {
+                console.log(data);
+            };
+            setStatus('start');
+            setTime(0);
+            _load();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    function _load() {
+        if (sound) {
+            sound.release();
+        }
+
+        let soundref = new Sound(audioPath, Sound.MAIN_BUNDLE, (error) => {
+            if (error) {
+                ToastAndroid.show('failed to load the sound', ToastAndroid.SHORT);
+                console.log('failed to load the sound', error);
+            } else {
+                // sound.setCurrentTime(0);
+
+                setIsPlaying(false);
+                setSound(soundref);
+                // console.log(soundref.getCurrentTime);
+                //setCurrentTime(0);
+                // soundref.setCurrentTime(0)
+                setDuration(soundref['_duration']);
+                Interval = setInterval(
+                    () =>
+                        soundref.getCurrentTime((seconds) => {
+                            setCurrentTime(seconds);
+                            // console.log('at ' + Math.floor(seconds));
+                        }),
+                    100,
+                );
+            }
+        });
+    }
+    function PlayAudio() {
+        if (status === 'pause' || status === 'play') {
+            ToastAndroid.show('Please Finish Recording First...', ToastAndroid.SHORT);
+        } else {
+            if (sound == null)
+                return ToastAndroid.show('Please Load First', ToastAndroid.SHORT);
+            if (isplaying) {
+                sound.pause();
+                setIsPlaying(false);
+            } else {
+                sound.play((success) => {
+                    if (success) {
+                        clearInterval(Interval);
+                        setCurrentTime(duration);
+                        setIsPlaying(false);
+                        console.log('successfully finished playing');
+                    } else {
+                        console.log('playback failed due to audio decoding errors');
+                    }
+                });
+                setIsPlaying(true);
+            }
+        }
     }
 
     const formatTime = (secs) => {
@@ -56,165 +149,36 @@ export default function AudioPlayer(props) {
         }
     };
 
-
-    const StartRec = async () => {
-
-        if (recording) {
-            console.log('Already recording!');
-            if (recPaused) {
-                try {
-                    await AudioRecorder.resumeRecording();
-                    setRecPaused(false);
-                } catch (error) {
-                    console.error(error);
-                }
-            } else {
-                try {
-                    const filePath = await AudioRecorder.pauseRecording();
-                    setRecPaused(true);
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-            return;
-        }
-
-        if (stopRecording) {
-            RecPath();
-        }
-
-        setRecording(true);
-        setRecPaused(false);
-
-        try {
-            const filePath = await AudioRecorder.startRecording();
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-
-    const stopRec = async () => {
-        if (!recording) {
-            console.warn('Can\'t stop, not recording!');
-            return;
-        }
-
-        setStopRecording(true);
-        setRecording(false);
-        setRecPaused(true);
-
-        try {
-            const filePath = await AudioRecorder.stopRecording();
-
-            if (Platform.OS === 'android') {
-                finishRecording(true, filePath);
-            }
-            return filePath;
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    const finishRecording = (didSucceed, filePath, fileSize) => {
-        //this.setState({ finished: didSucceed });
-        setFinished(didSucceed)
-        console.log(`Finished Recording of Duration: ${currentRecTime} Seconds at path: ${filePath}`);
-    }
-
-
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> AUDIO PLAYER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-    function playAudio() {
-        sound = new Sound(audioPath, Sound.MAIN_BUNDLE, (error) => {
-            if (error) {
-                console.log('failed to load the sound', error);
-            } else {
-                //console.log(sound);
-                setDuration(sound['_duration']);
-                Interval = setInterval(
-                    () =>
-                        sound.getCurrentTime((seconds) => {
-                            setCurrentPlayTime(seconds);
-                            //console.log('at ' + Math.floor(seconds));
-                        }),
-                    100,
-                );
-
-                sound.play((success) => {
-                    if (success) {
-                        clearInterval(Interval);
-                        console.log('successfully finished playing');
-                    } else {
-                        console.log('playback failed due to audio decoding errors');
-                    }
-                });
-            }
-        });
-    }
-
-    const pauseAudio = (sound) => {
-        try {
-
-            // sound.pause();
-            // setPaused(true)
-            // console.log(paused);
-
-            sound.pause(() => {
-                setPaused(true)
-            })
-
-        } catch (e) {
-            alert('Cannot play the file')
-            console.log('cannot play the audio file', e)
-        }
-    };
-
-    const stopAudio = () => {
-        try {
-            sound.stop(() => {
-                setAudioLoaded(false)
-                setPaused(true)
-                //  sound.play();
-            });
-
-        } catch (e) {
-            console.log('Cannot play the audio file: ', e);
-        }
-    };
-
-    const onSeeking = (currentPlayTime) => {
-        setCurrentPlayTime(currentPlayTime);
-    }
-
-
     return (
 
         <View style={styles.container}>
+             <Header
+                title='Audio Player'
+            />
+            <View style={{flex:1, justifyContent: 'center',}}>
             <Text style={{ color: '#fff', fontSize: 20, alignSelf: 'center' }}>Sound Recorder</Text>
             <View style={{ alignItems: 'center' }}>
 
 
-                {/* DemoTIme */}
-                {/* <Text style={{ color: 'dodgerblue', fontSize: 40, padding: 20 }}>{formatTime(demoTime)}</Text> */}
+                {/* Recording Time */}
 
-                <Text style={{ color: 'dodgerblue', fontSize: 40, padding: 20 }}>{formatTime(currentRecTime)}</Text>
+                <Text style={{ color: 'dodgerblue', fontSize: 40, padding: 20 }}>{formatTime(time)}</Text>
 
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{ height: 5 }} />
 
                     {/* Start & Pause/Resume Recording */}
                     <TouchableOpacity
-                        onPress={StartRec}
+                        onPress={RecordAudio}
                         style={{ paddingHorizontal: 15 }}
                     >
-                        <Image source={recPaused ? playIcon : pauseIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
+                        <Image source={status == 'start' || status == 'play' ? playIcon : pauseIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
                     </TouchableOpacity>
                     <View style={{ height: 5 }} />
 
                     {/* Stop Recording */}
                     <TouchableOpacity
-                        onPress={stopRec}
+                        onPress={StopRecording}
                         style={{ paddingHorizontal: 15 }}
                     >
                         <Image source={stopIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
@@ -231,59 +195,35 @@ export default function AudioPlayer(props) {
 
                 <View style={{ flexDirection: 'row' }}>
 
-
                     <TouchableOpacity
-                        onPress={playAudio}
+                        onPress={PlayAudio}
                         style={{ paddingHorizontal: 15 }}
                     >
-                        <Image source={paused ? playIcon : pauseIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
+                        <Image source={isplaying ? pauseIcon : playIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
                     </TouchableOpacity>
-
-                    {/* <TouchableOpacity
-                        onPress={stopAudio}
-                        style={{ paddingHorizontal: 15 }}
-                    >
-                        <Image source={stopIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
-                    </TouchableOpacity> */}
 
                 </View>
 
             </View>
             <View style={{ padding: 30 }}>
                 <Slider
+                    value={currenttime}
                     minimumValue={0}
-                    value={currentPlayTime}
-                    maximumValue={duration}
                     minimumTrackTintColor="dodgerblue"
                     maximumTrackTintColor="#fff"
                     thumbTintColor='dodgerblue'
-                    onValueChange={onSeeking}
-                // onSlidingComplete={onSeek}
-
+                    onValueChange={(value) => {
+                        sound.setCurrentTime(value);
+                    }}
+                    maximumValue={duration}
                 />
-
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20 }}>
-                    <Text style={{ color: 'white' }}>{formatTime(currentPlayTime)}</Text>
+                    <Text style={{ color: 'white' }}>{formatTime(currenttime)}</Text>
                     <Text style={{ color: 'white' }}>{formatTime(duration)}</Text>
                 </View>
 
-                {/* <View style={{ flexDirection: 'row', padding: 20 }}>
-                    <Image source={speakerIcon} style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }} />
-                    <View style={{ width: '40%' }}>
-                        <Slider
-                            minimumValue={0}
-                            value={audio}
-                            maximumValue={2}
-                            minimumTrackTintColor="dodgerblue"
-                            maximumTrackTintColor="#fff"
-                            thumbTintColor='dodgerblue'
-                            onValueChange={volume}
-                        // onSlidingComplete={onSeek}
-                        />
-                    </View>
-                </View> */}
             </View>
-
+            </View>
         </View>
     )
 
@@ -292,7 +232,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#000',
         flex: 1,
-        justifyContent: 'center'
+        // justifyContent: 'center'
     },
     row: {
         flexDirection: 'row',

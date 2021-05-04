@@ -4,6 +4,7 @@ import { checkIcon, closeIcon, crossIcon, tickIcon, editIcon } from '../assets/i
 import { InputWithIcon } from '../Component/Inputs';
 import firestore from '@react-native-firebase/firestore';
 import { FlatList } from "react-native-gesture-handler";
+import { Header } from "../Component/Header";
 
 
 export default function Firestore(props) {
@@ -72,9 +73,11 @@ export default function Firestore(props) {
     )
     return (
         <View style={styles.container}>
-            <View style={styles.spaceDivider} />
+            <Header
+                title='Cloud Firestore'
+            />
 
-            <Text style={styles.titleText}>Cloud Firestore</Text>
+            {/* <Text style={styles.titleText}>Cloud Firestore</Text> */}
 
             <View style={{ paddingHorizontal: 20 }}>
                 <View style={styles.spaceDivider} />

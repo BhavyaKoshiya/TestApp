@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Button, ToastAndroid } from "react-native";
 import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType } from '@react-native-firebase/admob';
-
+import { Header } from "../Component/Header";
+// import NativeAdView, {
+//     CallToActionView,
+//     IconView,
+//     HeadlineView,
+//     TaglineView,
+//     AdvertiserView,
+//     AdBadge,
+//   } from 'react-native-admob-native-ads';
 
 const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL, {
     requestNonPersonalizedAdsOnly: true,
@@ -54,46 +62,65 @@ export default function Ads({ navigation }) {
 
 
     return (
-        <ScrollView style={{ flex: 1, padding: 10 }} >
-            <Text style={styles.titleText}>Admob ADS</Text>
-            <Button
-                title="Show Interstitial ad"
-                onPress={() => {
-                    if (interstitialLoaded == true) {
-                        interstitial.show();
-                    } else {
-                        ToastAndroid.show("Interstitial AD not loaded please wait!", ToastAndroid.SHORT);
-                    }
-
-                }}
+        <View style={{ flex: 1 }} >
+            <Header
+                title='Admob ADS'
             />
-            <View style={{height:10}} />
-            <Button
-                title="Show Rewarded ad"
-                onPress={() => {
-                    if (rewardLoaded == true) {
-                        rewarded.show();
-                    } else {
-                        ToastAndroid.show("Rewarded AD not loaded please wait!", ToastAndroid.SHORT);
-                    }
+            <View style={{ flex: 1, padding: 10 }} >
+                <ScrollView>
+                    <Button
+                        title="Show Interstitial ad"
+                        onPress={() => {
+                            if (interstitialLoaded == true) {
+                                interstitial.show();
+                            } else {
+                                ToastAndroid.show("Interstitial AD not loaded please wait!", ToastAndroid.SHORT);
+                            }
 
-                }}
-            />
+                        }}
+                    />
+                    <View style={{ height: 10 }} />
+                    <Button
+                        title="Show Rewarded ad"
+                        onPress={() => {
+                            if (rewardLoaded == true) {
+                                rewarded.show();
+                            } else {
+                                ToastAndroid.show("Rewarded AD not loaded please wait!", ToastAndroid.SHORT);
+                            }
 
-            <Text>ADAPTIVE BANNER</Text>
-            <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ADAPTIVE_BANNER} />
-            <Text>SMART BANNER</Text>
+                        }}
+                    />
+                    <View style={{ height: 10 }} />
+                    <Text>ADAPTIVE BANNER</Text>
+                    <View style={{ height: 10 }} />
+                    <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ADAPTIVE_BANNER} />
+                    <View style={{ height: 10 }} />
+                    <Text>SMART BANNER</Text>
+                    <View style={{ height: 10 }} />
 
-            <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.SMART_BANNER} />
-            <Text>WIDE SKYSCRAPER BANNER</Text>
+                    <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.SMART_BANNER} />
+                    <View style={{ height: 10 }} />
+                    <Text>WIDE SKYSCRAPPER BANNER</Text>
+                    <View style={{ height: 10 }} />
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.WIDE_SKYSCRAPER} />
+                        <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.WIDE_SKYSCRAPER} />
+                    </View>
+                    <View style={{ height: 10 }} />
+                    {/* <Text>NATIVE</Text>
+                <View style={{ height: 10 }} />
+                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.WIDE_SKYSCRAPER} />
                 <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.WIDE_SKYSCRAPER} />
+            </View> */}
+
+
+
+                </ScrollView>
             </View>
-
-
-        </ScrollView>
+        </View >
     )
 }
 const styles = StyleSheet.create({

@@ -2,12 +2,9 @@ import React, { useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Button } from "react-native";
 import { LoginButton, AccessToken } from 'react-native-fbsdk';
 import messaging from '@react-native-firebase/messaging';
-import crashlytics, { firebase } from '@react-native-firebase/crashlytics';
-import { GoogleSignin, GoogleSigninButton, statusCodes, } from '@react-native-google-signin/google-signin';
+import crashlytics from '@react-native-firebase/crashlytics';
+import { Header } from "../Component/Header";
 // import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
-
-import { ImageButton } from "../Component/ImgButton";
-import { newGoogleIcon } from "../assets/icon";
 
 export default function Profile({ navigation }) {
 
@@ -52,14 +49,11 @@ export default function Profile({ navigation }) {
 
     return (
         <View style={{ flex: 1 }} >
-
-            <Button title='toggle'
-                onPress={() => {
-                    navigation.toggleDrawer()
-                }}
-
+            <Header
+                title='Profile'
             />
-            <Text style={styles.titleText}>Profile</Text>
+
+            {/* <Text style={styles.titleText}>Profile</Text> */}
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
                 <View style={{ flex: 1, justifyContent: 'center', }}>

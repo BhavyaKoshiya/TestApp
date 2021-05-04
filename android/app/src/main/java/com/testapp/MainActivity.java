@@ -25,29 +25,29 @@ public class MainActivity extends ReactActivity {
     return "testApp";
   }
 
-  @Override
-  public void onConfigurationChanged(Configuration newConfig) {
-    super.onConfigurationChanged(newConfig);
-    Intent intent = new Intent("onConfigurationChanged");
-    intent.putExtra("newConfig", newConfig);
-    this.sendBroadcast(intent);
-  }
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    try {
-      PackageInfo info = getPackageManager().getPackageInfo("com.testapp", PackageManager.GET_SIGNATURES);
-      for (Signature signature : info.signatures) {
-        MessageDigest md = MessageDigest.getInstance("SHA");
-        md.update(signature.toByteArray());
-        Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-      }
-    } catch (PackageManager.NameNotFoundException e) {
-      Log.e("KeyHash:", e.toString());
-    } catch (NoSuchAlgorithmException e) {
-      Log.e("KeyHash:", e.toString());
-    }
-
-  }
+//  @Override
+//  public void onConfigurationChanged(Configuration newConfig) {
+//    super.onConfigurationChanged(newConfig);
+//    Intent intent = new Intent("onConfigurationChanged");
+//    intent.putExtra("newConfig", newConfig);
+//    this.sendBroadcast(intent);
+//  }
+//  @Override
+//  protected void onCreate(Bundle savedInstanceState) {
+//    super.onCreate(savedInstanceState);
+//
+//    try {
+//      PackageInfo info = getPackageManager().getPackageInfo("com.testapp", PackageManager.GET_SIGNATURES);
+//      for (Signature signature : info.signatures) {
+//        MessageDigest md = MessageDigest.getInstance("SHA");
+//        md.update(signature.toByteArray());
+//        Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+//      }
+//    } catch (PackageManager.NameNotFoundException e) {
+//      Log.e("KeyHash:", e.toString());
+//    } catch (NoSuchAlgorithmException e) {
+//      Log.e("KeyHash:", e.toString());
+//    }
+//
+//  }
 }

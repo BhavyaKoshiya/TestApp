@@ -3,6 +3,7 @@ import { ImageBackground, View, Text, StyleSheet, TouchableOpacity, ToastAndroid
 import { deleteIcon, editIcon } from '../assets/icon/index';
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
+import { Header } from "../Component/Header";
 
 
 
@@ -101,8 +102,10 @@ export default function CloudStorage(props) {
     };
     return (
         <View style={styles.container}>
-            <Text style={styles.titleText}>Cloud Storage</Text>
-
+            {/* <Text style={styles.titleText}>Cloud Storage</Text> */}
+            <Header
+                title='Cloud Storage'
+            />
             <View style={styles.spaceDivider} />
 
             <View style={{ flexDirection:'row', justifyContent:'center' }}>

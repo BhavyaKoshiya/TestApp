@@ -4,6 +4,7 @@ import { deleteIcon, editIcon } from '../assets/icon/index';
 import { InputWithIcon } from '../Component/Inputs';
 import database from '@react-native-firebase/database';
 import { FlatList } from "react-native-gesture-handler";
+import { Header } from "../Component/Header";
 
 LogBox.ignoreLogs([
     'Encountered two children with the same key',
@@ -101,8 +102,10 @@ export default function RealTimeDB(props) {
 
     return (
         <View style={styles.container}>
-
-            <Text style={styles.titleText}>Realtime DataBase</Text>
+            <Header
+                title='Realtime DataBase'
+            />
+            {/* <Text style={styles.titleText}>Realtime DataBase</Text> */}
 
 
             <View style={{ paddingHorizontal: 20, marginTop: 10, }}>
