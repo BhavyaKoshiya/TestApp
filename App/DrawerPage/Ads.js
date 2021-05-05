@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Button, ToastAndroid } from "react-native";
 import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType } from '@react-native-firebase/admob';
 import { Header } from "../Component/Header";
-// import NativeAdView, {
-//     CallToActionView,
-//     IconView,
-//     HeadlineView,
-//     TaglineView,
-//     AdvertiserView,
-//     AdBadge,
-//   } from 'react-native-admob-native-ads';
+import NativeAdView, {
+    CallToActionView,
+    IconView,
+    HeadlineView,
+    TaglineView,
+    AdvertiserView,
+    AdBadge,
+} from 'react-native-admob-native-ads';
 
 const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL, {
     requestNonPersonalizedAdsOnly: true,
@@ -25,6 +25,7 @@ export default function Ads({ navigation }) {
 
     const [interstitialLoaded, setInterstitialLoaded] = useState(false);
     const [rewardLoaded, setRewardLoaded] = useState(false);
+    const nativeAdViewRef = useRef();
 
 
     useEffect(() => {
@@ -46,6 +47,8 @@ export default function Ads({ navigation }) {
             }
         });
 
+        __onNativeAd();
+
         // Start loading the interstitial straight away
         interstitial.load();
 
@@ -60,7 +63,14 @@ export default function Ads({ navigation }) {
 
     }, []);
 
-
+    const __onNativeAd = () => {
+        console.log(nativeAdViewRef);
+        try {
+            nativeAdViewRef.current?.loadAd();
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <View style={{ flex: 1 }} >
             <Header
@@ -92,6 +102,46 @@ export default function Ads({ navigation }) {
                         }}
                     />
                     <View style={{ height: 10 }} />
+                    <Text>NATIVE</Text>
+                    <View style={{ height: 10 }} />
+
+                    <NativeAdView
+                        style={{ width: '95%', alignSelf: 'center', height: 100, }}
+                        ref={nativeAdViewRef}
+                        adUnitID="ca-app-pub-3940256099942544/2247696110" // TEST adUnitID
+                        onAdFailedToLoad={({ error }) => {
+                            ToastAndroid.show(error.message, ToastAndroid.SHORT);
+                            console.log(error);
+                        }}>
+                        <View style={{ height: 100, width: '100%', }}>
+                            <AdBadge />
+                            <View
+                                style={{
+                                    height: 100, width: '100%', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 10,
+                                }}>
+                                <IconView style={{ width: 60, height: 60, }}
+                                />
+                                <View style={{ width: '65%', maxWidth: '65%', paddingHorizontal: 6, }}>
+                                    <HeadlineView style={{ fontWeight: 'bold', fontSize: 13, }} />
+                                    <TaglineView
+                                        numberOfLines={1}
+                                        style={{ fontSize: 11, }}
+                                    />
+                                    <AdvertiserView
+                                        style={{ fontSize: 10, color: 'gray', }}
+                                    />
+                                </View>
+
+                                <CallToActionView
+                                    style={{
+                                        height: 45, paddingHorizontal: 12, backgroundColor: 'purple', justifyContent: 'center', alignItems: 'center', borderRadius: 5, elevation: 10,
+                                    }}
+                                    textStyle={{ color: 'white', fontSize: 14 }}
+                                />
+                            </View>
+                        </View>
+                    </NativeAdView>
+                    <View style={{ height: 10 }} />
                     <Text>ADAPTIVE BANNER</Text>
                     <View style={{ height: 10 }} />
                     <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ADAPTIVE_BANNER} />
@@ -109,14 +159,6 @@ export default function Ads({ navigation }) {
                         <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.WIDE_SKYSCRAPER} />
                     </View>
                     <View style={{ height: 10 }} />
-                    {/* <Text>NATIVE</Text>
-                <View style={{ height: 10 }} />
-                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.WIDE_SKYSCRAPER} />
-                <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.WIDE_SKYSCRAPER} />
-            </View> */}
-
-
 
                 </ScrollView>
             </View>

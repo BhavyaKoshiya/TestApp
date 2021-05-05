@@ -30,6 +30,7 @@
     "buffer": "^6.0.3",
     "react": "17.0.1",
     "react-native": "0.63.4",
+    "react-native-admob-native-ads": "^0.4.0",
     "react-native-audio": "^4.3.0",
     "react-native-fbads": "^7.0.5",
     "react-native-fbsdk": "^3.0.0",
