@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Button, ToastAndroid } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Button, ToastAndroid, Dimensions } from "react-native";
 import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType } from '@react-native-firebase/admob';
 import { Header } from "../Component/Header";
 import NativeAdView, {
@@ -76,7 +76,7 @@ export default function Ads({ navigation }) {
             <Header
                 title='Admob ADS'
             />
-            <View style={{ flex: 1, padding: 10 }} >
+            <View style={{ flex: 1,padding:10 }} >
                 <ScrollView>
                     <Button
                         title="Show Interstitial ad"
@@ -102,11 +102,11 @@ export default function Ads({ navigation }) {
                         }}
                     />
                     <View style={{ height: 10 }} />
-                    <Text>NATIVE</Text>
+                    <Text>NATIVE AD</Text>
                     <View style={{ height: 10 }} />
 
                     <NativeAdView
-                        style={{ width: '95%', alignSelf: 'center', height: 100, }}
+                        style={{ width: Dimensions.get('screen').width - 20, alignSelf: 'center', height: 100, }}
                         ref={nativeAdViewRef}
                         adUnitID="ca-app-pub-3940256099942544/2247696110" // TEST adUnitID
                         onAdFailedToLoad={({ error }) => {
@@ -114,7 +114,7 @@ export default function Ads({ navigation }) {
                             console.log(error);
                         }}>
                         <View style={{ height: 100, width: '100%', }}>
-                            <AdBadge />
+                            <AdBadge style={{height:15, width: 15,}} />
                             <View
                                 style={{
                                     height: 100, width: '100%', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 10,
@@ -134,9 +134,9 @@ export default function Ads({ navigation }) {
 
                                 <CallToActionView
                                     style={{
-                                        height: 45, paddingHorizontal: 12, backgroundColor: 'purple', justifyContent: 'center', alignItems: 'center', borderRadius: 5, elevation: 10,
+                                        height: 40, width: 70, backgroundColor: 'purple', elevation: 10,
                                     }}
-                                    textStyle={{ color: 'white', fontSize: 14 }}
+                                    textStyle={{ color: 'white', fontSize: 14, textAlign: 'center' }}
                                 />
                             </View>
                         </View>
