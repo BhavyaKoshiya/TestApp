@@ -21,7 +21,7 @@ import playIcon from './play.png'
 import stopIcon from './stop.png'
 import forward10Icon from './forward10.png'
 import backward10Icon from './backward10.png'
-import rePlayIcon from './replay.png'
+import replayIcon from './replay.png'
 import webIcon from './web.png'
 import videoIcon from './video.png'
 import micIcon from './mic.png'
@@ -40,10 +40,13 @@ import newGoogleIcon from './newGoogle.png'
 import facebookIcon from './facebook.png'
 import muteIcon from './mute-speaker.png';
 import menuIcon from './menu.png';
-
+import ExitFullScreenIcon from './exit-fullscreen.png';
+import FullScreenIcon from './fullscreen.png';
 
 
 export {
+    ExitFullScreenIcon,
+    FullScreenIcon,
     menuIcon,
     muteIcon,
     checkIcon,
@@ -69,7 +72,7 @@ export {
     stopIcon,
     forward10Icon,
     backward10Icon,
-    rePlayIcon,
+    replayIcon,
     webIcon,
     videoIcon,
     micIcon,

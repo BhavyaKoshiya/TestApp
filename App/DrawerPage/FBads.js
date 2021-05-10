@@ -34,17 +34,14 @@ export default function FBads(props) {
     }
     return (
         <View style={{ flex: 1 }}>
-             <Header
+            <Header
                 title='Facebook ADS'
             />
             {/* <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={styles.titleText}>Facebook ADs</Text>
             </View> */}
             {/* <View style={{ height: 20 }} /> */}
-            <View>
-                <AdComponent adsManager={adsManager} />
-            </View>
-            <View style={{ height: 20 }} />
+
 
 
             <Text>Banner- Standard</Text>
@@ -65,19 +62,28 @@ export default function FBads(props) {
                 onError={(err) => console.log('Banner Large error', err)}
             />
             <View style={{ height: 20 }} />
+            <Text>Native</Text>
+            <View style={{ height: 20 }} />
+
+            <View>
+                <AdComponent adsManager={adsManager} />
+            </View>
+            <View style={{ height: 20 }} />
             <TouchableOpacity
                 style={styles.button}
                 onPress={InterstitialAd}
             >
                 <Text style={{ fontSize: 20, color: 'white', paddingHorizontal: 25 }}>InterstitialAd</Text>
             </TouchableOpacity>
+
+
         </View>
     )
 }
 const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
-        backgroundColor: '#9a09ff',
+        backgroundColor: '#3875ea',
         borderRadius: 30,
         alignSelf: 'center',
         paddingVertical: 15,
@@ -97,16 +103,23 @@ class MyAd extends React.Component {
         // console.log(this.props.nativeAd.bodyText);
         return (
             <View>
-                <AdChoicesView />
-                <AdIconView style={{ width: 50, height: 50 }} />
-                <TriggerableView>
-                    <Text style={{ fontWeight: 'bold' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                    <AdChoicesView />
+                    <Text style={{ fontWeight: 'bold', marginLeft: 30 }}>
                         {this.props.nativeAd.headline}
                     </Text>
-                    <Text> {this.props.nativeAd.bodyText}</Text>
+                </View>
+
+                {/* <AdIconView style={{ width: 50, height: 50 }} /> */}
+                <TriggerableView style={{ flexDirection: 'row' }}>
+                    <MediaView style={{ width: 160, height: 90}} />
+                    <View style={{ height: '100%' }}>
+
+                        <Text> {this.props.nativeAd.bodyText}</Text>
+                    </View>
                 </TriggerableView>
-                <MediaView style={{ width: 160, height: 90 }} />
-                
+
+
             </View>
         );
     }

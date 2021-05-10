@@ -13,11 +13,11 @@ export function DrawerItem({ source, onPress, iconStyle, title, contentContainer
                 onPress={onPress}
                 {...other}
             >
-                <View style={[isActive ? { backgroundColor: '#f4e5ff' } : { backgroundColor: 'transparent' }, styles.tabContainer, contentContainerStyle]}>
+                <View style={[isActive ? { backgroundColor: '#dbedff' } : { backgroundColor: 'transparent' }, styles.tabContainer, contentContainerStyle]}>
 
-                    {source && <Image style={[isActive ? { tintColor: '#9a09ff' } : { tintColor: '#000' },styles.tabIcon, iconStyle]} source={source} />}
+                    {source && <Image style={[isActive ? { tintColor: '#3875ea' } : { tintColor: '#000' },styles.tabIcon, iconStyle]} source={source} />}
 
-                <Text style={[isActive ? { color: '#9a09ff' } : { color: '#000' },styles.tabTitle, titleTextStyle]}>{title}</Text>
+                <Text style={[isActive ? { color: '#3875ea' } : { color: '#000' },styles.tabTitle, titleTextStyle]}>{title}</Text>
                 </View>
             </TouchableOpacity>
         </View >

@@ -142,7 +142,7 @@ export default function Profile({ navigation }) {
 }
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: '#9a09ff',
+        backgroundColor: '#3875ea',
         borderRadius: 30,
         alignSelf: 'center',
         paddingVertical: 15,

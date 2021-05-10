@@ -62,7 +62,7 @@ export default function Update({ route, navigation }) {
 
     return (
         <SafeAreaView style={styles.container} >
-            <View style={{ borderColor: '#9a09ff', borderWidth: 1, borderRadius: 15 }}>
+            <View style={{ borderColor: '#3875ea', borderWidth: 1, borderRadius: 15 }}>
                 <View style={{ height: 10 }} />
 
                 <Text style={styles.titleText}>Update Data</Text>
@@ -80,12 +80,12 @@ export default function Update({ route, navigation }) {
 
                         <InputWithIcon
                             placeholder='Name'
-                            selectionColor={'#9a09ff'}
+                            selectionColor={'#3875ea'}
                             value={Name}
                             title={'Name'}
                             titleStyle={{ color: '#595959' }}
                             onChangeText={text => setName(text)}
-                            contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#9a09ff', height: 40, width: 170 }}
+                            contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#3875ea', height: 40, width: 170 }}
                         />
                         <View style={{ width: 15 }} />
                         <InputWithIcon
@@ -93,9 +93,9 @@ export default function Update({ route, navigation }) {
                             value={Surname}
                             title={'Surname'}
                             titleStyle={{ color: '#595959' }}
-                            selectionColor={'#9a09ff'}
+                            selectionColor={'#3875ea'}
                             onChangeText={text => setSurname(text)}
-                            contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#9a09ff', height: 40, width: 170 }}
+                            contentContainerStyle={{ backgroundColor: '#F2F2F2', borderWidth: 1, borderColor: '#3875ea', height: 40, width: 170 }}
                         />
 
                     </View>
@@ -120,7 +120,7 @@ export default function Update({ route, navigation }) {
                     <View style={styles.spaceDivider} />
 
                     <TouchableOpacity
-                        style={[styles.button, { backgroundColor: 'dodgerblue' }]}
+                        style={[styles.button, { backgroundColor: '#3875ea' }]}
                         onPress={() => {
                             navigation.goBack();
                         }}
@@ -142,13 +142,13 @@ const styles = StyleSheet.create({
     },
     header: {
         fontSize: 20,
-        color: 'dodgerblue'
+        color: '#3875ea'
     },
     spaceDivider: {
         height: 15
     },
     button: {
-        backgroundColor: '#9a09ff',
+        backgroundColor: '#3875ea',
         borderRadius: 30,
         paddingVertical: 7,
         paddingHorizontal: 30

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ImageBackground, View, Text, StyleSheet, TouchableOpacity, ToastAndroid, PermissionsAndroid, Alert } from "react-native";
+import { ImageBackground, View, Text, StyleSheet, TouchableOpacity, ToastAndroid, PermissionsAndroid, Alert, Image } from "react-native";
 import { deleteIcon, editIcon } from '../assets/icon/index';
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
@@ -130,7 +130,7 @@ export default function CloudStorage(props) {
                 <Text style={{ alignSelf: 'center' }}> {transferred}% Uploaded </Text>
             }
 
-            <ImageBackground style={{ height: 600, width: 425, alignSelf: 'center' }} source={{ uri: image }} />
+            <Image style={{ height: 600, width: 425, alignSelf: 'center', resizeMode:'contain' }} source={{ uri: image }} />
 
 
         </View>
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         height: 15
     },
     button: {
-        backgroundColor: '#9a09ff',
+        backgroundColor: '#3875ea',
         borderRadius: 30,
         alignItems: 'center',
         paddingVertical: 15,

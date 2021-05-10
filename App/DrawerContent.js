@@ -15,8 +15,8 @@ export function DrawerContent({ state, navigation }) {
     return (
         <View style={styles.container}>
             <ImageBackground
-                source={require('./assets/background.jpg')}
-                style={{ width: undefined, paddingHorizontal: 20 }}
+                source={require('./assets/blueBackground.jpg')}
+                style={{ paddingHorizontal: 20 }}
             >
                 <View style={{ height: 5 }} />
                 <View style={styles.imageContainer}>
@@ -31,33 +31,32 @@ export function DrawerContent({ state, navigation }) {
                 <View style={{ height: 5 }} />
 
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ color: '#fff' }}>20M Followers</Text>
+                    <Text style={{ color: '#fff' }}>282M Followers</Text>
                     <Image source={groupIcon} style={{ height: 16, width: 16, marginHorizontal: 5, tintColor: '#fff' }}></Image>
                 </View>
                 <View style={styles.spaceDivider} />
 
             </ImageBackground>
             <View style={styles.divider} />
-            <ScrollView style={{ flex: 1, padding: 20 }}>
-                <View style={{ height: 10 }} />
-
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                bounces={false}
+                overScrollMode='never'
+                style={{ flex: 1, paddingHorizontal: 20 }}
+            >
+                <View style={{ height: 20 }} />
 
                 <DrawerItem
-                    onPress={() => {
-                        navigation.navigate('Profile')
-                    }}
+                    onPress={() => { navigation.navigate('Profile') }}
                     source={userIcon}
                     title='Profile'
                     isActive={activeIndex === 0}
-
                 />
 
                 <View style={styles.spaceDivider} />
 
                 <DrawerItem
-                    onPress={() => {
-                        navigation.navigate('Gallery')
-                    }}
+                    onPress={() => { navigation.navigate('Gallery') }}
                     source={galleryIcon}
                     title='Gallery'
                     isActive={activeIndex === 1}
@@ -67,9 +66,7 @@ export function DrawerContent({ state, navigation }) {
                 <View style={styles.spaceDivider} />
 
                 <DrawerItem
-                    onPress={() => {
-                        navigation.navigate('VideoPlayer')
-                    }}
+                    onPress={() => { navigation.navigate('VideoPlayer') }}
                     source={videoIcon}
                     title='Video Player'
                     isActive={activeIndex === 2}
@@ -77,9 +74,7 @@ export function DrawerContent({ state, navigation }) {
 
                 <View style={styles.spaceDivider} />
                 <DrawerItem
-                    onPress={() => {
-                        navigation.navigate('AudioPlayer')
-                    }}
+                    onPress={() => { navigation.navigate('AudioPlayer') }}
                     source={micIcon}
                     title='Audio Recorder/Player'
                     isActive={activeIndex === 3}
@@ -87,9 +82,7 @@ export function DrawerContent({ state, navigation }) {
 
                 <View style={styles.spaceDivider} />
                 <DrawerItem
-                    onPress={() => {
-                        navigation.navigate('Web')
-                    }}
+                    onPress={() => { navigation.navigate('Web') }}
                     source={webIcon}
                     title='Web'
                     isActive={activeIndex === 4}
@@ -97,9 +90,7 @@ export function DrawerContent({ state, navigation }) {
 
                 <View style={styles.spaceDivider} />
                 <DrawerItem
-                    onPress={() => {
-                        navigation.navigate('RealTimeDB')
-                    }}
+                    onPress={() => { navigation.navigate('RealTimeDB') }}
                     source={dbIcon}
                     title='Realtime DataBase'
                     isActive={activeIndex === 5}
@@ -107,18 +98,14 @@ export function DrawerContent({ state, navigation }) {
 
                 <View style={styles.spaceDivider} />
                 <DrawerItem
-                    onPress={() => {
-                        navigation.navigate('Firestore')
-                    }}
+                    onPress={() => { navigation.navigate('Firestore') }}
                     source={todoIcon}
                     title='TODO - Cloud Firestore'
                     isActive={activeIndex === 6}
                 />
                 <View style={styles.spaceDivider} />
                 <DrawerItem
-                    onPress={() => {
-                        navigation.navigate('CloudStorage')
-                    }}
+                    onPress={() => { navigation.navigate('CloudStorage') }}
                     source={uploadIcon}
                     title='Cloud Storage'
                     isActive={activeIndex === 7}
@@ -127,37 +114,30 @@ export function DrawerContent({ state, navigation }) {
                 <View style={styles.spaceDivider} />
 
                 <DrawerItem
-                    onPress={() => {
-                        navigation.navigate('Ads')
-                    }}
+                    onPress={() => { navigation.navigate('Ads') }}
                     source={adsIcon}
                     title='Admob ADS'
                     isActive={activeIndex === 8}
                 />
                 <View style={styles.spaceDivider} />
                 <DrawerItem
-                    onPress={() => {
-                        navigation.navigate('FBads')
-                    }}
+                    onPress={() => { navigation.navigate('FBads') }}
                     source={facebookIcon}
-                    title='FaceBook ADs'
+                    title='Facebook ADs'
                     isActive={activeIndex === 9}
                 />
 
                 <View style={styles.spaceDivider} />
 
                 <DrawerItem
-                    onPress={() => {
-                        navigation.navigate('Share')
-                    }}
+                    onPress={() => { navigation.navigate('Share') }}
                     source={shareIcon}
                     title='Tell a Friend'
                     isActive={activeIndex === 10}
                 />
 
-                
-
                 <View style={styles.spaceDivider} />
+
             </ScrollView>
         </View>
     );
@@ -193,7 +173,7 @@ const styles = StyleSheet.create({
 
     },
     spaceDivider: {
-        height: 15,
+        height: 10,
     },
     divider: {
         height: 1,
@@ -207,7 +187,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1.5,
-        borderColor: '#9a09ff',
+        borderColor: '#3875ea',
         borderRadius: 85,
         marginTop: 20
 

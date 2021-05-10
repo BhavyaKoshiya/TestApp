@@ -31,8 +31,10 @@ function DrawerTab() {
 
     return (
 
-        <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />} drawerStyle={{ width: Dimensions.get('window').width * 0.80 }}  >
-
+        <Drawer.Navigator
+            drawerContent={props => <DrawerContent {...props} />}
+            drawerStyle={{ width: Dimensions.get('window').width * 0.80 }}
+        >
             <Drawer.Screen name="Profile" component={Profile} options={{ title: 'Profile' }} />
             <Drawer.Screen name="Gallery" component={Gallery} options={{ title: 'Gallery' }} />
             <Drawer.Screen name="VideoPlayer" component={VideoPlayer} options={{ title: 'Video Player' }} />
@@ -63,7 +65,7 @@ export default function Index() {
             .then(link => {
                 alert('Background: ' + link.url);
             }).catch(error => {
-               // console.log(error);
+                // console.log(error);
             });
         return () => unsubscribe();
     }, [])

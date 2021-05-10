@@ -1,24 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Button, ToastAndroid, Dimensions } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Button, ToastAndroid, Dimensions } from "react-native";
 import { InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType } from '@react-native-firebase/admob';
 import { Header } from "../Component/Header";
-import NativeAdView, {
-    CallToActionView,
-    IconView,
-    HeadlineView,
-    TaglineView,
-    AdvertiserView,
-    AdBadge,
-} from 'react-native-admob-native-ads';
+import NativeAdView, { CallToActionView, IconView, HeadlineView, TaglineView, AdvertiserView, AdBadge } from 'react-native-admob-native-ads';
 
 const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL, {
-    requestNonPersonalizedAdsOnly: true,
-    keywords: ['fashion', 'clothing'],
+    requestNonPersonalizedAdsOnly: false,
 });
 
 const rewarded = RewardedAd.createForAdRequest(TestIds.REWARDED, {
-    requestNonPersonalizedAdsOnly: true,
-    keywords: ['fashion', 'clothing'],
+    requestNonPersonalizedAdsOnly: false,
 });
 
 export default function Ads({ navigation }) {
@@ -33,29 +24,28 @@ export default function Ads({ navigation }) {
         const interstitialListener = interstitial.onAdEvent(type => {
             if (type === AdEventType.LOADED) {
                 setInterstitialLoaded(true);
-
             }
         });
 
         const rewardListener = rewarded.onAdEvent((type, error, reward) => {
+
             if (type === RewardedAdEventType.LOADED) {
                 setRewardLoaded(true);
             }
 
+            console.log('rewarded error', error);
+
             if (type === RewardedAdEventType.EARNED_REWARD) {
-                console.log('User earned reward of ', reward);
+                ToastAndroid.show('User earned reward of ' + reward, ToastAndroid.SHORT);
             }
         });
 
         __onNativeAd();
 
-        // Start loading the interstitial straight away
         interstitial.load();
 
-        // Start loading the rewarded ad straight away
         rewarded.load();
 
-        // Unsubscribe from events on unmount
         return () => {
             rewardListener();
             interstitialListener();
@@ -64,7 +54,7 @@ export default function Ads({ navigation }) {
     }, []);
 
     const __onNativeAd = () => {
-        console.log(nativeAdViewRef);
+        // console.log(nativeAdViewRef);
         try {
             nativeAdViewRef.current?.loadAd();
         } catch (error) {
@@ -76,7 +66,7 @@ export default function Ads({ navigation }) {
             <Header
                 title='Admob ADS'
             />
-            <View style={{ flex: 1,padding:10 }} >
+            <View style={{ flex: 1, padding: 10 }} >
                 <ScrollView>
                     <Button
                         title="Show Interstitial ad"
@@ -86,7 +76,6 @@ export default function Ads({ navigation }) {
                             } else {
                                 ToastAndroid.show("Interstitial AD not loaded please wait!", ToastAndroid.SHORT);
                             }
-
                         }}
                     />
                     <View style={{ height: 10 }} />
@@ -98,9 +87,9 @@ export default function Ads({ navigation }) {
                             } else {
                                 ToastAndroid.show("Rewarded AD not loaded please wait!", ToastAndroid.SHORT);
                             }
-
                         }}
                     />
+
                     <View style={{ height: 10 }} />
                     <Text>NATIVE AD</Text>
                     <View style={{ height: 10 }} />
@@ -114,7 +103,7 @@ export default function Ads({ navigation }) {
                             console.log(error);
                         }}>
                         <View style={{ height: 100, width: '100%', }}>
-                            <AdBadge style={{height:15, width: 15,}} />
+                            <AdBadge style={{ height: 13, width: 15, alignItems: 'center', justifyContent: 'center' }} />
                             <View
                                 style={{
                                     height: 100, width: '100%', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 10,
@@ -151,9 +140,12 @@ export default function Ads({ navigation }) {
 
                     <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.SMART_BANNER} />
                     <View style={{ height: 10 }} />
+                    <Text>300x200 BANNER</Text>
+                    <View style={{ height: 10 }} />
+                    <BannerAd unitId={TestIds.BANNER} size={'300x200'} />
+                    <View style={{ height: 10 }} />
                     <Text>WIDE SKYSCRAPPER BANNER</Text>
                     <View style={{ height: 10 }} />
-
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.WIDE_SKYSCRAPER} />
                         <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.WIDE_SKYSCRAPER} />
@@ -167,7 +159,7 @@ export default function Ads({ navigation }) {
 }
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: '#9a09ff',
+        backgroundColor: '#3875ea',
         borderRadius: 30,
         alignSelf: 'center',
         paddingVertical: 15,

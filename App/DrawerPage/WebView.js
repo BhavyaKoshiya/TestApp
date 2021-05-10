@@ -12,8 +12,8 @@ export default function Web(props) {
             <Header
                 title='Web View'
             />
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'dodgerblue' }}>
-                <View style={{ height: '5%', width: '100%', borderColor: 'dodgerblue', borderWidth: 1 }}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#3875ea' }}>
+                <View style={{ height: '5%', width: '100%', borderColor: '#3875ea', borderWidth: 1 }}>
                     <WebView
 
                         source={{ html: '<h1 style="text-align:center">Hello, Web View</h1>' }}
