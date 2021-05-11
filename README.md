@@ -2,9 +2,9 @@
 
 if react-native-admob-native-ads show error like this one
 ERROR:
-* What went wrong:
-Execution failed for task ':react-native-admob-native-ads:compileDebugJavaWithJavac'.
-> Compilation failed; see the compiler error output for details.
+>* What went wrong:
+>Execution failed for task ':react-native-admob-native-ads:compileDebugJavaWithJavac'.
+>> Compilation failed; see the compiler error output for details.
 
 then
 SOLUTION:
