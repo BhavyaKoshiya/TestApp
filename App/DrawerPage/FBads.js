@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ToastAndroid } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ToastAndroid, Button } from "react-native";
 import {
     InterstitialAdManager,
     BannerView,
@@ -41,9 +41,12 @@ export default function FBads(props) {
                 <Text style={styles.titleText}>Facebook ADs</Text>
             </View> */}
             {/* <View style={{ height: 20 }} /> */}
-
-
-
+            <View style={{ height: 20 }} />
+            <Button
+                title="Show Interstitial ad"
+                onPress={InterstitialAd}
+            />
+            <View style={{ height: 20 }} />
             <Text>Banner- Standard</Text>
             <BannerView
                 placementId="429478654990775_455691985702775"
@@ -69,12 +72,6 @@ export default function FBads(props) {
                 <AdComponent adsManager={adsManager} />
             </View>
             <View style={{ height: 20 }} />
-            <TouchableOpacity
-                style={styles.button}
-                onPress={InterstitialAd}
-            >
-                <Text style={{ fontSize: 20, color: 'white', paddingHorizontal: 25 }}>InterstitialAd</Text>
-            </TouchableOpacity>
 
 
         </View>
@@ -109,17 +106,11 @@ class MyAd extends React.Component {
                         {this.props.nativeAd.headline}
                     </Text>
                 </View>
-
+                <Text> {this.props.nativeAd.bodyText}</Text>
                 {/* <AdIconView style={{ width: 50, height: 50 }} /> */}
-                <TriggerableView style={{ flexDirection: 'row' }}>
-                    <MediaView style={{ width: 160, height: 90}} />
-                    <View style={{ height: '100%' }}>
-
-                        <Text> {this.props.nativeAd.bodyText}</Text>
-                    </View>
+                <TriggerableView style={{ flexDirection: 'row', }}>
+                    <MediaView style={{ width: 160, height: 90 }} />
                 </TriggerableView>
-
-
             </View>
         );
     }

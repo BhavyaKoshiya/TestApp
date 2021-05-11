@@ -57,7 +57,7 @@ export default function AudioPlayer(props) {
     }
 
     async function RecordAudio() {
-        const granted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO);
+        let granted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO);
         if (granted) {
             if (isplaying) {
                 ToastAndroid.show("Please Pause Audio Player", ToastAndroid.SHORT)

@@ -34,6 +34,8 @@ function DrawerTab() {
         <Drawer.Navigator
             drawerContent={props => <DrawerContent {...props} />}
             drawerStyle={{ width: Dimensions.get('window').width * 0.80 }}
+            backBehavior='initialRoute'
+            initialRouteName='Profile'
         >
             <Drawer.Screen name="Profile" component={Profile} options={{ title: 'Profile' }} />
             <Drawer.Screen name="Gallery" component={Gallery} options={{ title: 'Gallery' }} />

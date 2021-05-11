@@ -79,7 +79,7 @@ export default function Ads({ navigation }) {
                         }}
                     />
                     <View style={{ height: 10 }} />
-                    <Button
+                    {/* <Button
                         title="Show Rewarded ad"
                         onPress={() => {
                             if (rewardLoaded == true) {
@@ -88,7 +88,7 @@ export default function Ads({ navigation }) {
                                 ToastAndroid.show("Rewarded AD not loaded please wait!", ToastAndroid.SHORT);
                             }
                         }}
-                    />
+                    /> */}
 
                     <View style={{ height: 10 }} />
                     <Text>NATIVE AD</Text>
@@ -144,13 +144,13 @@ export default function Ads({ navigation }) {
                     <View style={{ height: 10 }} />
                     <BannerAd unitId={TestIds.BANNER} size={'300x200'} />
                     <View style={{ height: 10 }} />
-                    <Text>WIDE SKYSCRAPPER BANNER</Text>
+                    {/* <Text>WIDE SKYSCRAPPER BANNER</Text>
                     <View style={{ height: 10 }} />
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.WIDE_SKYSCRAPER} />
                         <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.WIDE_SKYSCRAPER} />
-                    </View>
-                    <View style={{ height: 10 }} />
+                    </View> 
+                    <View style={{ height: 10 }} />*/}
 
                 </ScrollView>
             </View>

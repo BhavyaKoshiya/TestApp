@@ -55,12 +55,12 @@ export default function VideoPlayer(props) {
         const granted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
 
         if (granted) {
-            ToastAndroid.show("Storage Permission Granted", ToastAndroid.SHORT)
+            // ToastAndroid.show("Storage Permission Granted", ToastAndroid.SHORT)
         }
         else {
             console.log("Storage Permission Denied")
             await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE)
-            ToastAndroid.show("Storage Permission Denied", ToastAndroid.SHORT)
+            // ToastAndroid.show("Storage Permission Denied", ToastAndroid.SHORT)
         }
     }
 
@@ -119,6 +119,7 @@ export default function VideoPlayer(props) {
     };
 
     const onLoad = (data) => {
+        console.log(data);
         setDuration(Math.round(data.duration));
         setIsLoading(false);
     };
@@ -160,7 +161,6 @@ export default function VideoPlayer(props) {
                     onEnd={onEnd}
                     onLoad={onLoad}
                     onLoadStart={onLoadStart}
-                    resizeMode={'cover'}
                     onProgress={onProgress}
                     paused={paused}
                     fullscreen={fullscreen}
@@ -219,13 +219,19 @@ export default function VideoPlayer(props) {
                                 </TouchableOpacity>
                             }
 
-                            <TouchableOpacity onPress={onForward} style={{ paddingHorizontal: 15, marginBottom: 10 }}>
+                            <TouchableOpacity
+                                onPress={onForward}
+                                style={{ paddingHorizontal: 15, marginBottom: 10 }}
+                            >
                                 <Image
                                     source={forward10Icon}
                                     style={{ height: 25, width: 25, alignSelf: 'center', tintColor: '#fff', }}
                                 />
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={fullscreen ? onExitFullscreen : onFullscreen} style={{ paddingHorizontal: 15, marginBottom: 10 }}>
+                            <TouchableOpacity
+                                onPress={fullscreen ? onExitFullscreen : onFullscreen}
+                                style={{ paddingHorizontal: 15, marginBottom: 10 }}
+                            >
                                 <Image
                                     source={fullscreen ? ExitFullScreenIcon : FullScreenIcon}
                                     style={{ height: 20, width: 20, alignSelf: 'center', tintColor: '#fff', }}
