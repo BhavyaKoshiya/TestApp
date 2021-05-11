@@ -25,7 +25,7 @@ export default function CloudStorage(props) {
             console.log(image);
             const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
             setImage(imageUri);
-        });
+        }).catch(e => { console.log(e) });
 
     }
     const pickFromCamera = async () => {
@@ -38,7 +38,7 @@ export default function CloudStorage(props) {
                     console.log(image);
                     const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
                     setImage(imageUri);
-                });
+                }).catch(e => { console.log(e) });
             } else {
                 ToastAndroid.show('Permission Denied', ToastAndroid.LONG)
             }

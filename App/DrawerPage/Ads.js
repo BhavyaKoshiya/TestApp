@@ -102,12 +102,13 @@ export default function Ads({ navigation }) {
                             ToastAndroid.show(error.message, ToastAndroid.SHORT);
                             console.log(error);
                         }}>
-                        <View style={{ height: 100, width: '100%', }}>
-                            <AdBadge style={{ height: 13, width: 15, alignItems: 'center', justifyContent: 'center' }} />
+                        <View style={{ height: 100, width: '100%', backgroundColor: 'lightblue', padding: 10, borderRadius: 5 }}>
+                            <AdBadge style={{ position: 'absolute', top: 5, left: 5, height: 13, width: 15, alignItems: 'center', justifyContent: 'center' }} />
                             <View
                                 style={{
-                                    height: 100, width: '100%', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 10,
+                                    height: '100%', width: '100%', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingHorizontal: 10,
                                 }}>
+
                                 <IconView style={{ width: 60, height: 60, }}
                                 />
                                 <View style={{ width: '65%', maxWidth: '65%', paddingHorizontal: 6, }}>
@@ -122,9 +123,7 @@ export default function Ads({ navigation }) {
                                 </View>
 
                                 <CallToActionView
-                                    style={{
-                                        height: 40, width: 70, backgroundColor: 'purple', elevation: 10,
-                                    }}
+                                    style={{ height: 40, width: 70, backgroundColor: 'dodgerblue', elevation: 10, }}
                                     textStyle={{ color: 'white', fontSize: 14, textAlign: 'center' }}
                                 />
                             </View>

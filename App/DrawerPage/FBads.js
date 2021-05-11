@@ -95,23 +95,46 @@ const styles = StyleSheet.create({
     },
 });
 
+// class MyAd extends React.Component {
+//     render() {
+//         // console.log(this.props.nativeAd.bodyText);
+//         return (
+//             <View>
+//                 <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+//                     <AdChoicesView />
+//                     <Text style={{ fontWeight: 'bold', marginLeft: 30 }}>
+//                         {this.props.nativeAd.headline}
+//                     </Text>
+//                 </View>
+//                 <Text> {this.props.nativeAd.bodyText}</Text>
+//                 {/* <AdIconView style={{ width: 50, height: 50 }} /> */}
+//                 <TriggerableView style={{ flexDirection: 'row', }}>
+//                     <MediaView style={{ width: 160, height: 90 }} />
+//                 </TriggerableView>
+//             </View>
+//         );
+//     }
+// }
 class MyAd extends React.Component {
     render() {
         // console.log(this.props.nativeAd.bodyText);
         return (
-            <View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                    <AdChoicesView />
-                    <Text style={{ fontWeight: 'bold', marginLeft: 30 }}>
-                        {this.props.nativeAd.headline}
-                    </Text>
+            <TriggerableView>
+                <View style={{ height: 140, width: '100%', padding: 15, backgroundColor: 'lightblue', borderRadius: 10, }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                        <AdChoicesView onPress={() => console.log('pressed')} />
+                        <Text style={{ fontWeight: 'bold', marginLeft: 30 }}>
+                            {this.props.nativeAd.headline}
+                        </Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', flex: 1, }}>
+                        <MediaView style={{ width: 160, height: 90 }} />
+                        <View style={{ justifyContent: 'center', paddingHorizontal: 10, width: '30%', }}>
+                            <Text>{this.props.nativeAd.bodyText}</Text>
+                        </View>
+                    </View>
                 </View>
-                <Text> {this.props.nativeAd.bodyText}</Text>
-                {/* <AdIconView style={{ width: 50, height: 50 }} /> */}
-                <TriggerableView style={{ flexDirection: 'row', }}>
-                    <MediaView style={{ width: 160, height: 90 }} />
-                </TriggerableView>
-            </View>
+            </TriggerableView>
         );
     }
 }
