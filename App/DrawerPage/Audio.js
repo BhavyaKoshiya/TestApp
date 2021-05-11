@@ -158,7 +158,7 @@ export default function AudioPlayer(props) {
             if (sound == null)
                 return ToastAndroid.show('Please Record Sound First', ToastAndroid.SHORT);
             if (isplaying) {
-                sound.PAUSE();
+                sound.pause();
                 setIsPlaying(false);
             } else {
                 sound.play((success) => {
